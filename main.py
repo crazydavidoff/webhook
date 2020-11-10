@@ -17,8 +17,10 @@ def respond():
 
     data = json.loads(request.data)
     print(data)
-
-    baseParams['content'] = data['check_result']['matching_messages'][0]['fields']['logsource'] +" "+ data['stream']['alert_conditions'][0]['title'] +" "+ data['check_result']['matching_messages'][0]['fields']['lun']
+    try:
+        baseParams['content'] = data['check_result']['matching_messages'][0]['fields']['logsource'] +" "+ data['stream']['alert_conditions'][0]['title'] +" "+ data['check_result']['matching_messages'][0]['fields']['lun']
+    except:
+        print("Error parsing message.")
 
     print(baseParams['content'])
 
