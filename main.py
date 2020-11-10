@@ -4,7 +4,7 @@ from flask import Flask, request, Response
 
 app = Flask(__name__)
 
-@app.route('/graylog', methods=['POST'])
+@app.route('/graylog/lost-access', methods=['POST'])
 
 def respond():
     jasminurl = 'http://example.com:1401/send?%s'
