@@ -21,6 +21,7 @@ def respond():
         baseParams['content'] = data['check_result']['matching_messages'][0]['fields']['logsource'] +" "+ data['stream']['alert_conditions'][0]['title'] +" "+ data['check_result']['matching_messages'][0]['fields']['lun']
     except:
         print("Error parsing message.")
+        return Response(status=200)
 
     print(baseParams['content'])
 
