@@ -1,4 +1,3 @@
-import urllib.request, urllib.error, urllib.parse
 import urllib.request, urllib.parse, urllib.error
 import json
 from flask import Flask, request, Response
