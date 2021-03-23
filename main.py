@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 @app.route('/graylog/lost-access', methods=['POST'])
 
-def respond():
-    jasminurl = 'http://example.com:1401/send?%s'
-    baseParams = {'username':'jasmin', 'password':'passwd', 'from':'sys', 'coding': '0'}
-    phones = {'User1': '123', 'User2': '321', 'User3': '231'}
+def lostaccess():
+    jasminurl = 'http://smsgate.example.com:1401/send?%s'
+    baseParams = {'username':'user', 'password':'pswd', 'from':'TEST', 'coding': '0'}
+    phones = {'User1': 'Phone1', 'User2': 'Phone2', 'User3': 'Phone3'}
 
     def send(phone):
         baseParams['to'] = phone
@@ -24,6 +24,25 @@ def respond():
         return Response(status=200)
 
     print(baseParams['content'])
+
+    send(phones['User1'])
+    send(phones['User2'])
+    send(phones['User3'])
+
+    return Response(status=200)
+
+@app.route('/graylog/sms-error', methods=['POST'])
+
+def smserror():
+    jasminurl = 'http://smsgate.example.com:1401/send?%s'
+    baseParams = {'username':'user', 'password':'pswd', 'from':'TEST', 'coding': '0'}
+    phones = {'User1': 'Phone1', 'User2': 'Phone2', 'User3': 'Phone3'}
+
+    def send(phone):
+        baseParams['to'] = phone
+        urllib.request.urlopen(jasminurl % urllib.parse.urlencode(baseParams)).read()
+
+    baseParams['content'] = 'Error status in message in SMS Stream.'
 
     send(phones['User1'])
     send(phones['User2'])
